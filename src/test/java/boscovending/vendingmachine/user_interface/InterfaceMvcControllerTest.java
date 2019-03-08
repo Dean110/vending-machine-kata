@@ -13,7 +13,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(DisplayController.class)
+@WebMvcTest(UserInterfaceController.class)
 @DisplayName("Spring WebMvcTest for ArticlesController:")
 public class InterfaceMvcControllerTest {
     @Resource

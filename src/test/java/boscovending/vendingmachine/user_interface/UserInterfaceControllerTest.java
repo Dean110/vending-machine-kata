@@ -1,21 +1,19 @@
 package boscovending.vendingmachine.user_interface;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
-@DisplayName("DisplayController unit tests:")
-class DisplayControllerTest {
+@DisplayName("UserInterfaceController unit tests:")
+class UserInterfaceControllerTest {
 
-    private DisplayController underTest;
+    private UserInterfaceController underTest;
 
     @BeforeEach
     void setUp() {
-        underTest = new DisplayController();
+        underTest = new UserInterfaceController();
     }
 
     @Test

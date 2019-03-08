@@ -1,13 +1,18 @@
 package boscovending.vendingmachine.user_interface;
 
-public class DisplayController {
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class UserInterfaceController {
 
     private VendingMachineDisplay display;
 
-    public DisplayController() {
+    public UserInterfaceController() {
         display = VendingMachineDisplayFactory.createDisplay();
     }
 
+    @GetMapping("/api/display")
     public String checkDisplayMessage() {
         return display.getMessage();
     }
