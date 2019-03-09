@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 @DisplayName("MoneyHandler unit tests:")
 public class MoneyHandlerTest {
-    MoneyHandler underTest;
+    private MoneyHandler underTest;
 
     @BeforeEach
     void setup() {
