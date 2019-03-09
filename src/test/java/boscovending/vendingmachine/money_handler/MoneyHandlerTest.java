@@ -1,4 +1,4 @@
-package boscovending.vendingmachine.moneyHandler;
+package boscovending.vendingmachine.money_handler;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,12 +7,12 @@ import java.math.BigDecimal;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CoinHopperTest {
-    CoinHopper underTest;
+public class MoneyHandlerTest {
+    MoneyHandler underTest;
 
     @BeforeEach
     void setup() {
-        underTest = new CoinHopper();
+        underTest = new MoneyHandler();
     }
 
     @Test
