@@ -24,6 +24,8 @@ public class CoinHopper {
             case NICKEL:
                 balance = balance.add(BigDecimal.valueOf(5, 2));
                 break;
+            case DIME:
+                balance = balance.add(BigDecimal.valueOf(10,2));
         }
     }
 }

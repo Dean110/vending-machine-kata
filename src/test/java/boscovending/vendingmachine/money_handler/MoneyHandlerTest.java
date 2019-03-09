@@ -22,19 +22,19 @@ public class MoneyHandlerTest {
     }
 
     @Test
-    void moneyHandlerShouldHaveA25CentBalanceWithOneQuarterDeposited(){
+    void moneyHandlerShouldHaveA25CentBalanceWithOneQuarterDeposited() {
         underTest.insertCoin(Coin.QUARTER);
         assertedBalance("0.25");
     }
 
     @Test
-    void moneyHandlerShouldHaveA5CentBalanceWithOneNickelDeposited(){
+    void moneyHandlerShouldHaveA5CentBalanceWithOneNickelDeposited() {
         underTest.insertCoin(Coin.NICKEL);
         assertedBalance("0.05");
     }
 
     @Test
-    void moneyHandlerShouldHaveA10CentBalanceWithOneDimeDeposited(){
+    void moneyHandlerShouldHaveA10CentBalanceWithOneDimeDeposited() {
         underTest.insertCoin(Coin.DIME);
         assertedBalance("0.10");
     }
