@@ -3,7 +3,14 @@ package boscovending.vendingmachine.money_handler;
 import java.math.BigDecimal;
 
 public class MoneyHandler {
-    public BigDecimal getBalance() {
-        return new BigDecimal("0.00");
+    CoinHopper coinHopper;
+
+    public MoneyHandler(CoinHopper coinHopper){
+        this.coinHopper = coinHopper;
+    }
+
+
+    public BigDecimal getDepositBalance() {
+        return coinHopper.getBalance();
     }
 }

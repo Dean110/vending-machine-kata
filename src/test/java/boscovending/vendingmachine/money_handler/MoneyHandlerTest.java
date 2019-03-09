@@ -12,12 +12,12 @@ public class MoneyHandlerTest {
 
     @BeforeEach
     void setup() {
-        underTest = new MoneyHandler();
+        underTest = MoneyHandlerFactory.createMoneyHandler();
     }
 
     @Test
     void coinHopperShouldHaveAZeroBalanceWithNoCoinsDeposited() {
-        BigDecimal balance = underTest.getBalance();
+        BigDecimal balance = underTest.getDepositBalance();
         assertThat(balance).isEqualTo("0.00");
     }
 
