@@ -27,6 +27,18 @@ public class MoneyHandlerTest {
         assertedBalance("0.25");
     }
 
+    @Test
+    void moneyHandlerShouldHaveA5CentBalanceWithOneNickelDeposited(){
+        underTest.insertCoin(Coin.NICKEL);
+        assertedBalance("0.05");
+    }
+
+    @Test
+    void moneyHandlerShouldHaveA10CentBalanceWithOneDimeDeposited(){
+        underTest.insertCoin(Coin.DIME);
+        assertedBalance("0.10");
+    }
+
     private void assertedBalance(String expectedValue) {
         BigDecimal balance = underTest.getDepositBalance();
         assertThat(balance).isEqualTo(expectedValue);

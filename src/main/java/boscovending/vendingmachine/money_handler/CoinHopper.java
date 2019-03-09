@@ -17,6 +17,13 @@ public class CoinHopper {
     }
 
     public void depositMoney(Coin coin) {
-        balance = balance.add(BigDecimal.valueOf(25, 2));
+        switch (coin){
+            case QUARTER:
+                balance = balance.add(BigDecimal.valueOf(25, 2));
+                break;
+            case NICKEL:
+                balance = balance.add(BigDecimal.valueOf(5, 2));
+                break;
+        }
     }
 }
