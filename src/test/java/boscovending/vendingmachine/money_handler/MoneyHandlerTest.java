@@ -18,14 +18,18 @@ public class MoneyHandlerTest {
 
     @Test
     void moneyHandlerShouldHaveAZeroBalanceWithNoCoinsDeposited() {
-        BigDecimal balance = underTest.getDepositBalance();
-        assertThat(balance).isEqualTo("0.00");
+        assertedBalance("0.00");
     }
+
     @Test
     void moneyHandlerShouldHaveA25CentBalanceWithOneQuarterDeposited(){
         underTest.insertCoin(Coin.QUARTER);
+        assertedBalance("0.25");
+    }
+
+    private void assertedBalance(String expectedValue) {
         BigDecimal balance = underTest.getDepositBalance();
-        assertThat(balance).isEqualTo("0.25");
+        assertThat(balance).isEqualTo(expectedValue);
     }
 
 
