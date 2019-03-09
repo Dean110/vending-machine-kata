@@ -7,12 +7,12 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static boscovending.vendingmachine.utility.Coin.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
+
 @DisplayName("MoneyHandler unit tests:")
 public class MoneyHandlerTest {
     MoneyHandler underTest;
@@ -25,7 +25,7 @@ public class MoneyHandlerTest {
     @Test
     @DisplayName("The MoneyHandler processes different coins and adjusts the coin hopper balance accordingly.")
     void insertCoin_CoinsOfDifferentValues_AffectsCoinHopperBalance() {
-        assertAll("Deposited coins affect the balance:",
+        assertAll("Inserted coins should affect the balance according to their value.",
                 () -> testDepositedCoinsAffectBalance("0.00"),
                 () -> testDepositedCoinsAffectBalance("0.25", QUARTER),
                 () -> testDepositedCoinsAffectBalance("0.05", NICKEL),
@@ -46,6 +46,5 @@ public class MoneyHandlerTest {
         BigDecimal balance = underTest.getDepositBalance();
         assertThat(balance).isEqualTo(expectedValue);
     }
-
 
 }
