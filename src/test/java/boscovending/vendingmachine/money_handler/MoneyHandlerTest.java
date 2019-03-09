@@ -1,5 +1,6 @@
 package boscovending.vendingmachine.money_handler;
 
+import boscovending.vendingmachine.utility.Coin;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,9 +17,15 @@ public class MoneyHandlerTest {
     }
 
     @Test
-    void coinHopperShouldHaveAZeroBalanceWithNoCoinsDeposited() {
+    void moneyHandlerShouldHaveAZeroBalanceWithNoCoinsDeposited() {
         BigDecimal balance = underTest.getDepositBalance();
         assertThat(balance).isEqualTo("0.00");
+    }
+    @Test
+    void moneyHandlerShouldHaveA25CentBalanceWithOneQuarterDeposited(){
+        underTest.insertCoin(Coin.QUARTER);
+        BigDecimal balance = underTest.getDepositBalance();
+        assertThat(balance).isEqualTo("0.25");
     }
 
 

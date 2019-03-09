@@ -1,9 +1,11 @@
 package boscovending.vendingmachine.money_handler;
 
+import boscovending.vendingmachine.utility.Coin;
+
 import java.math.BigDecimal;
 
 public class MoneyHandler {
-    CoinHopper coinHopper;
+    private CoinHopper coinHopper;
 
     public MoneyHandler(CoinHopper coinHopper){
         this.coinHopper = coinHopper;
@@ -12,5 +14,9 @@ public class MoneyHandler {
 
     public BigDecimal getDepositBalance() {
         return coinHopper.getBalance();
+    }
+
+    public void insertCoin(Coin coin) {
+        coinHopper.depositMoney(coin);
     }
 }
