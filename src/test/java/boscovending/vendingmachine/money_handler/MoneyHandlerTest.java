@@ -39,6 +39,12 @@ public class MoneyHandlerTest {
         assertedBalance("0.10");
     }
 
+    @Test
+    void moneyHandlerShouldHaveAZeroBalanceWithOneSlugDeposited() {
+        underTest.insertCoin(Coin.SLUG);
+        assertedBalance("0.00");
+    }
+
     private void assertedBalance(String expectedValue) {
         BigDecimal balance = underTest.getDepositBalance();
         assertThat(balance).isEqualTo(expectedValue);
