@@ -2,12 +2,18 @@ package boscovending.vendingmachine.money_handler;
 
 import boscovending.vendingmachine.utility.Coin;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
+import static boscovending.vendingmachine.utility.Coin.*;
 import static org.assertj.core.api.Assertions.assertThat;
-
+import static org.junit.jupiter.api.Assertions.assertAll;
+@DisplayName("MoneyHandler unit tests:")
 public class MoneyHandlerTest {
     MoneyHandler underTest;
 
@@ -17,32 +23,23 @@ public class MoneyHandlerTest {
     }
 
     @Test
-    void moneyHandlerShouldHaveAZeroBalanceWithNoCoinsDeposited() {
-        assertedBalance("0.00");
+    @DisplayName("The MoneyHandler processes different coins and adjusts the coin hopper balance accordingly.")
+    void insertCoin_CoinsOfDifferentValues_AffectsCoinHopperBalance() {
+        assertAll("Deposited coins affect the balance:",
+                () -> testDepositedCoinsAffectBalance("0.00"),
+                () -> testDepositedCoinsAffectBalance("0.25", QUARTER),
+                () -> testDepositedCoinsAffectBalance("0.05", NICKEL),
+                () -> testDepositedCoinsAffectBalance("0.10", DIME),
+                () -> testDepositedCoinsAffectBalance("0.00", SLUG),
+                () -> testDepositedCoinsAffectBalance("0.40", NICKEL, DIME, QUARTER)
+        );
     }
 
-    @Test
-    void moneyHandlerShouldHaveA25CentBalanceWithOneQuarterDeposited() {
-        underTest.insertCoin(Coin.QUARTER);
-        assertedBalance("0.25");
-    }
-
-    @Test
-    void moneyHandlerShouldHaveA5CentBalanceWithOneNickelDeposited() {
-        underTest.insertCoin(Coin.NICKEL);
-        assertedBalance("0.05");
-    }
-
-    @Test
-    void moneyHandlerShouldHaveA10CentBalanceWithOneDimeDeposited() {
-        underTest.insertCoin(Coin.DIME);
-        assertedBalance("0.10");
-    }
-
-    @Test
-    void moneyHandlerShouldHaveAZeroBalanceWithOneSlugDeposited() {
-        underTest.insertCoin(Coin.SLUG);
-        assertedBalance("0.00");
+    private void testDepositedCoinsAffectBalance(String expectedBalance, Coin... coins) {
+        underTest = MoneyHandlerFactory.createMoneyHandler();
+        List<Coin> coinsForDeposit = Arrays.asList(coins);
+        coinsForDeposit.forEach(underTest::insertCoin);
+        assertedBalance(expectedBalance);
     }
 
     private void assertedBalance(String expectedValue) {
