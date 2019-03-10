@@ -51,11 +51,20 @@ public class MoneyHandlerTest {
         assertThat(balance).isEqualTo(expectedValue);
     }
     @Test
-    @DisplayName("MoneyHandler resets the balance when the coin return is pressed.")
-    void coinReturnEmptiesTheCoinHopperAndResetsTheBalance(){
+    @DisplayName("MoneyHandler resets the balance when return coins is pressed.")
+    void returnCoinsEmptiesTheCoinHopperAndResetsTheBalance(){
         depositCoins(NICKEL,DIME,DIME);
-        underTest.coinReturn();
+        underTest.returnCoins();
         assertedBalance("0.00");
+    }
+    @Test
+    @DisplayName("MoneyHandler returns inserted coins to the coin return when return coins is pressed.")
+    void returnCoins_DimeDeposited_ReturnsTheDimeThatIsDeposited(){
+        Coin depositedCoin = DIME;
+        depositCoins(depositedCoin);
+        underTest.returnCoins();
+        List<Coin> result = underTest.checkCoinReturn();
+        assertThat(result).containsExactlyInAnyOrder(depositedCoin);
     }
     @Test
     @DisplayName("MoneyHandler sends deposited slugs to the coin return.")

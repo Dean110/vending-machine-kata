@@ -24,7 +24,8 @@ public class MoneyHandler {
         coinHopper.depositMoney(coin);
     }
 
-    public void coinReturn() {
+    public void returnCoins() {
+        coinReturn.setHasReturn(true);
         coinHopper.returnCoins();
     }
 
