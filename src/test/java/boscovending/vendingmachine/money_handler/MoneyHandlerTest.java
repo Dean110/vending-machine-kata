@@ -23,7 +23,7 @@ public class MoneyHandlerTest {
     }
 
     @Test
-    @DisplayName("The MoneyHandler processes different coins and adjusts the coin hopper balance accordingly.")
+    @DisplayName("MoneyHandler processes different coins and adjusts the coin hopper balance accordingly.")
     void insertCoin_CoinsOfDifferentValues_AffectsCoinHopperBalance() {
         assertAll("Inserted coins should affect the balance according to their value.",
                 () -> testDepositedCoinsAffectBalance("0.00"),
@@ -37,14 +37,31 @@ public class MoneyHandlerTest {
 
     private void testDepositedCoinsAffectBalance(String expectedBalance, Coin... coins) {
         underTest = MoneyHandlerFactory.createMoneyHandler();
+        depositCoins(coins);
+        assertedBalance(expectedBalance);
+    }
+
+    private void depositCoins(Coin... coins) {
         List<Coin> coinsForDeposit = Arrays.asList(coins);
         coinsForDeposit.forEach(underTest::insertCoin);
-        assertedBalance(expectedBalance);
     }
 
     private void assertedBalance(String expectedValue) {
         BigDecimal balance = underTest.getDepositBalance();
         assertThat(balance).isEqualTo(expectedValue);
     }
-
+    @Test
+    @DisplayName("MoneyHandler resets the balance when the coin return is pressed.")
+    void coinReturnEmptiesTheCoinHopperAndResetsTheBalance(){
+        depositCoins(NICKEL,DIME,DIME);
+        underTest.coinReturn();
+        assertedBalance("0.00");
+    }
+    @Test
+    @DisplayName("MoneyHandler sends deposited slugs to the coin return.")
+    void slugsAreReturnedToTheCoinReturn(){
+        depositCoins(SLUG);
+        List<Coin> result = underTest.checkCoinReturn();
+        assertThat(result).containsExactlyInAnyOrder(SLUG);
+    }
 }

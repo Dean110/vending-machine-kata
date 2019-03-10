@@ -28,4 +28,8 @@ public class CoinHopper {
                 balance = balance.add(BigDecimal.valueOf(10,2));
         }
     }
+
+    public void returnCoins() {
+        balance = new BigDecimal("0.00");
+    }
 }
