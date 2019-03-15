@@ -3,7 +3,6 @@ package boscovending.vendingmachine.money_handler;
 import boscovending.vendingmachine.utility.Coin;
 
 import java.math.BigDecimal;
-import java.util.Collections;
 import java.util.List;
 
 public class MoneyHandler {
@@ -16,8 +15,12 @@ public class MoneyHandler {
     }
 
 
-    public BigDecimal getDepositBalance() {
-        return coinHopper.getBalance();
+    public BigDecimal getHopperBalance() {
+        List<Coin> hopperContents = coinHopper.getHopper();
+        return coinHopper.getHopper()
+                         .stream()
+                         .map(Coin::getValue)
+                         .reduce(new BigDecimal("0.00"), BigDecimal::add);
     }
 
     public void insertCoin(Coin coin) {
@@ -27,8 +30,7 @@ public class MoneyHandler {
     public void returnCoins() {
         coinReturn.setHasReturn(true);
         coinReturn.getReturnSlot().addAll(coinHopper.getHopper());
-
-        coinHopper.returnCoins();
+        coinHopper.getHopper().clear();
     }
 
     public List<Coin> checkCoinReturn() {

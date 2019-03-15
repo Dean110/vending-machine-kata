@@ -47,28 +47,31 @@ public class MoneyHandlerTest {
     }
 
     private void assertedBalance(String expectedValue) {
-        BigDecimal balance = underTest.getDepositBalance();
+        BigDecimal balance = underTest.getHopperBalance();
         assertThat(balance).isEqualTo(expectedValue);
     }
+
     @Test
     @DisplayName("MoneyHandler resets the balance when return coins is pressed.")
-    void returnCoinsEmptiesTheCoinHopperAndResetsTheBalance(){
-        depositCoins(NICKEL,DIME,DIME);
+    void returnCoinsEmptiesTheCoinHopperAndResetsTheBalance() {
+        depositCoins(NICKEL, DIME, DIME);
         underTest.returnCoins();
         assertedBalance("0.00");
     }
+
     @Test
     @DisplayName("MoneyHandler returns dime to the coin return when return coins is pressed.")
-    void returnCoins_DimeDeposited_ReturnsTheDimeThatIsDeposited(){
+    void returnCoins_DimeDeposited_ReturnsTheDimeThatIsDeposited() {
         Coin depositedCoin = DIME;
         depositCoins(depositedCoin);
         underTest.returnCoins();
         List<Coin> result = underTest.checkCoinReturn();
         assertThat(result).containsExactlyInAnyOrder(depositedCoin);
     }
+
     @Test
     @DisplayName("MoneyHandler returns nickel to the coin return when return coins is pressed.")
-    void returnCoins_NickelDeposited_ReturnsTheNickelThatIsDeposited(){
+    void returnCoins_NickelDeposited_ReturnsTheNickelThatIsDeposited() {
         Coin depositedCoin = NICKEL;
         depositCoins(depositedCoin);
         underTest.returnCoins();
@@ -78,7 +81,7 @@ public class MoneyHandlerTest {
 
     @Test
     @DisplayName("MoneyHandler sends deposited slugs to the coin return.")
-    void slugsAreReturnedToTheCoinReturn(){
+    void slugsAreReturnedToTheCoinReturn() {
         depositCoins(SLUG);
         List<Coin> result = underTest.checkCoinReturn();
         assertThat(result).containsExactlyInAnyOrder(SLUG);
