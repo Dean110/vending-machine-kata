@@ -58,7 +58,7 @@ public class MoneyHandlerTest {
         assertedBalance("0.00");
     }
     @Test
-    @DisplayName("MoneyHandler returns inserted coins to the coin return when return coins is pressed.")
+    @DisplayName("MoneyHandler returns dime to the coin return when return coins is pressed.")
     void returnCoins_DimeDeposited_ReturnsTheDimeThatIsDeposited(){
         Coin depositedCoin = DIME;
         depositCoins(depositedCoin);
@@ -67,10 +67,21 @@ public class MoneyHandlerTest {
         assertThat(result).containsExactlyInAnyOrder(depositedCoin);
     }
     @Test
+    @DisplayName("MoneyHandler returns nickel to the coin return when return coins is pressed.")
+    void returnCoins_NickelDeposited_ReturnsTheNickelThatIsDeposited(){
+        Coin depositedCoin = NICKEL;
+        depositCoins(depositedCoin);
+        underTest.returnCoins();
+        List<Coin> result = underTest.checkCoinReturn();
+        assertThat(result).containsExactlyInAnyOrder(depositedCoin);
+    }
+
+    @Test
     @DisplayName("MoneyHandler sends deposited slugs to the coin return.")
     void slugsAreReturnedToTheCoinReturn(){
         depositCoins(SLUG);
         List<Coin> result = underTest.checkCoinReturn();
         assertThat(result).containsExactlyInAnyOrder(SLUG);
     }
+
 }

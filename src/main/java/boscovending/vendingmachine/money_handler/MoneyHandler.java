@@ -26,6 +26,8 @@ public class MoneyHandler {
 
     public void returnCoins() {
         coinReturn.setHasReturn(true);
+        coinReturn.getReturnSlot().addAll(coinHopper.getHopper());
+
         coinHopper.returnCoins();
     }
 
